@@ -26,3 +26,30 @@ public:
         return profit;
     }
 };
+
+
+'''
+    class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        profit = 0
+        localmax = prices[0] ######## needs to set up localmax otherwise you might have negative profit 
+        localmin = prices[0]
+        i = 1
+        sz = len(prices)
+        if sz == 1: return 0
+        while(i<sz):
+            #find local max
+            while (i<sz and prices[i]>prices[i-1] and prices[i]>=localmin):
+                localmax = prices[i]
+                i+=1
+            profit += localmax - localmin
+            
+            if(i==sz-1): return profit ####### will improve running time. 
+            
+            #find local min
+            while (i<sz and prices[i]<=prices[i-1]):  ##Needs an equal sign to ensure i increments, avoid infinite loop. 
+                localmin = prices[i]
+                i+=1
+        return profit
+    
+    '''
